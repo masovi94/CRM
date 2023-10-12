@@ -23,7 +23,7 @@
                         <input type="text" id="username" class="form-control form-control-sm" required>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Senha:</label>
+                        <label for "password" class="form-label">Senha:</label>
                         <input type="password" id="password" class="form-control form-control-sm" required>
                     </div>
                     <div class="mb-3">
@@ -36,24 +36,8 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        function validateForm() {
-            // Validação do formulário aqui
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            
-            if (username === "" || password === "") {
-                document.getElementById("error").innerHTML = "Por favor, preencha todos os campos.";
-                return false;
-            } else {
-                // Envie os dados para o servidor e lide com a resposta do servidor aqui
-                // Certifique-se de implementar segurança adequada no servidor
-                return true;
-            }
-        }
-    </script>
+    <script src="navigation.js"></script>
 </body>
 </html>
-
 
 
