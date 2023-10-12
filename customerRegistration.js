@@ -1,11 +1,10 @@
 // script.js (Página de Cadastro)
 
-const customerForm = document.getElementById("customerForm");
+cconst customerForm = document.getElementById("customerForm");
 
 customerForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    // Obtenha os valores dos campos do formulário
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const phone = document.getElementById("phone").value;
@@ -23,20 +22,28 @@ customerForm.addEventListener("submit", function(event) {
         city: city
     };
 
-    // Armazene o cliente no localStorage
-    saveCustomer(customer);
-
-    // Limpe o formulário
+    // Envie o cliente para o servidor
+    sendCustomerToServer(customer);
     customerForm.reset();
 });
 
-function saveCustomer(customer) {
-    // Recupere os clientes existentes do localStorage ou inicialize um array vazio
-    const existingCustomers = JSON.parse(localStorage.getItem("customers")) || [];
-
-    // Adicione o novo cliente ao array
-    existingCustomers.push(customer);
-
-    // Armazene o array atualizado de clientes no localStorage
-    localStorage.setItem("customers", JSON.stringify(existingCustomers));
+function sendCustomerToServer(customer) {
+    fetch('/api/saveCustomer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(customer)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Cliente cadastrado com sucesso!");
+        } else {
+            alert("Erro ao cadastrar o cliente.");
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
 }
